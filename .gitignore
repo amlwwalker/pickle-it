@@ -1,0 +1,24 @@
+#testing configurations
+*.db
+client/testingfiles/
+client/client
+
+#directories
+deploy/
+out/
+
+#file extensions
+*.o
+*.qmlc
+*.cpp
+*.h
+*-packr.go
+*.dmg
+*.DS_Store
+
+#file prefixes
+moc*.*
+rcc*.*
+
+#binary files
+#

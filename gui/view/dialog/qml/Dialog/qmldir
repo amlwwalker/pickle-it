@@ -1,0 +1,3 @@
+module Dialog
+PatchDialog 1.0 PatchDialog.qml
+DeleteDialog 1.0 DeleteDialog.qml

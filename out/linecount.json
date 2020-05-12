@@ -1,0 +1,314 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "/Users/alex/go/src/github.com/amlwwalker/pickleIt",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2019-07-09 00:06:26",
+            "filesum": 47,
+            "codesum": 1839,
+            "commentsum": 525,
+            "blanksum": 419,
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 7,
+                    "code": 45,
+                    "comment": 0,
+                    "filename": "channels.go"
+                },
+                {
+                    "filename": "client/client",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 18,
+                    "code": 57,
+                    "comment": 16,
+                    "filename": "client/main.go"
+                },
+                {
+                    "blank": 4,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "client/README.md"
+                },
+                {
+                    "filename": "client/testingfiles/current_file.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "client/testingfiles/MD v3.sketch",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "client/testingfiles/moon-high-def.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "client/testingfiles/moon-high-def_restored_.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "client/testingfiles/moon-png.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "client/testingfiles/newimage.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "client/testingfiles/newimage_restored_ copy.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "client/testingfiles/newimage_restored_.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "client/testingfiles/smaller-moon.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "client/testingfiles/testthisfile.txt"
+                },
+                {
+                    "blank": 24,
+                    "code": 99,
+                    "comment": 30,
+                    "filename": "context.go"
+                },
+                {
+                    "filename": "cui/cui",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 7,
+                    "code": 11,
+                    "comment": 5,
+                    "filename": "cui/main.go"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "cui/objects.go"
+                },
+                {
+                    "blank": 3,
+                    "code": 10,
+                    "comment": 1,
+                    "filename": "cui/README.md"
+                },
+                {
+                    "filename": "cui/testingfiles/baby-moon.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "cui/testingfiles/baby-moon_restored_.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 49,
+                    "code": 317,
+                    "comment": 91,
+                    "filename": "cui/ui.go"
+                },
+                {
+                    "blank": 16,
+                    "code": 130,
+                    "comment": 2,
+                    "filename": "cui/uiManagement.go"
+                },
+                {
+                    "filename": "cui/workhorse.db",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 6,
+                    "code": 20,
+                    "comment": 3,
+                    "filename": "database/db.go"
+                },
+                {
+                    "blank": 4,
+                    "code": 10,
+                    "comment": 1,
+                    "filename": "database/db_fake.go"
+                },
+                {
+                    "blank": 22,
+                    "code": 101,
+                    "comment": 24,
+                    "filename": "database/db_real.go"
+                },
+                {
+                    "blank": 21,
+                    "code": 80,
+                    "comment": 29,
+                    "filename": "fsmanager/copy.go"
+                },
+                {
+                    "blank": 25,
+                    "code": 117,
+                    "comment": 67,
+                    "filename": "fsmanager/diff.go"
+                },
+                {
+                    "blank": 3,
+                    "code": 37,
+                    "comment": 20,
+                    "filename": "fsmanager/objects.go"
+                },
+                {
+                    "blank": 8,
+                    "code": 34,
+                    "comment": 13,
+                    "filename": "fsmanager/patcher.go"
+                },
+                {
+                    "blank": 11,
+                    "code": 21,
+                    "comment": 3,
+                    "filename": "fsmanager/screenshot.go"
+                },
+                {
+                    "blank": 17,
+                    "code": 73,
+                    "comment": 38,
+                    "filename": "fsmanager/watcher.go"
+                },
+                {
+                    "blank": 23,
+                    "code": 71,
+                    "comment": 4,
+                    "filename": "goroutine.go"
+                },
+                {
+                    "blank": 11,
+                    "code": 44,
+                    "comment": 10,
+                    "filename": "logic/api.go"
+                },
+                {
+                    "blank": 9,
+                    "code": 27,
+                    "comment": 5,
+                    "filename": "logic/intitalise.go"
+                },
+                {
+                    "blank": 32,
+                    "code": 203,
+                    "comment": 106,
+                    "filename": "logic/manager.go"
+                },
+                {
+                    "blank": 5,
+                    "code": 14,
+                    "comment": 1,
+                    "filename": "logic/objects.go"
+                },
+                {
+                    "blank": 16,
+                    "code": 44,
+                    "comment": 21,
+                    "filename": "logic/patchManager.go"
+                },
+                {
+                    "blank": 7,
+                    "code": 26,
+                    "comment": 3,
+                    "filename": "proc.go"
+                },
+                {
+                    "blank": 25,
+                    "code": 62,
+                    "comment": 1,
+                    "filename": "README.md"
+                },
+                {
+                    "filename": "README.pdf",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "utilities/filehashing.go"
+                },
+                {
+                    "blank": 29,
+                    "code": 92,
+                    "comment": 14,
+                    "filename": "utilities/filesystem.go"
+                },
+                {
+                    "blank": 4,
+                    "code": 38,
+                    "comment": 13,
+                    "filename": "utilities/objects.go"
+                },
+                {
+                    "blank": 10,
+                    "code": 33,
+                    "comment": 4,
+                    "filename": "utilities/progress.go"
+                }
+            ]
+        }
+    ]
+}

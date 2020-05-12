@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+    <file>assets/icons/icon.png</file>
+    <file>assets/icons/systray.png</file>
+    <file>assets/icons/systemtray-grayscale.png</file>
+ </qresource>
+</RCC>

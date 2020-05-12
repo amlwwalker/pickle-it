@@ -1,0 +1,325 @@
+import QtQuick 2.7          //Image
+import QtQuick.Controls 2.1 //GroupBox
+import QtQuick.Layouts 1.3  //GridLayout
+
+import Theme 1.0
+import Detail 1.0
+import ImageSCroller 1.0
+import "./Card/qml/card" as Card
+import "." as Custom              //needed for name clash with std Controls.Button
+import "./moment.js" as M
+
+DetailController {
+  property var parsedDateTime
+  GroupBox {
+    anchors.fill: parent
+    // anchors.topMargin: 5
+    background: Rectangle {
+      color: Theme.white
+      border.color: Theme.gray
+      anchors.fill: parent
+    }
+    Component {
+        id: eventListHeader
+        Rectangle {
+          // anchors.fill: parent
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            // border.color: "black"//Theme.darkGray
+            // border.width: 20
+            Layout.margins: 40
+            // Layout.padding: 10
+          // width: parent.width
+          height: eventDayLabel.height + 20
+          // anchors.margins: 10
+        Row {
+            id: eventDateRow
+            width: parent.width
+            height: eventDayLabel.height
+            spacing: 30
+            Label {
+                id: eventDayLabel
+                text: parsedDateTime.getDate()
+                font.pointSize: 30
+                color: "#aaa"
+            }
+
+            Column {
+                height: eventDayLabel.height
+
+                Label {
+                    readonly property var options: { weekday: "long" }
+                    text: Qt.locale().standaloneDayName(parsedDateTime.getDay(), Locale.LongFormat)
+                    font.pointSize: 18
+                    color: "#aaa"
+                }
+                Label {
+                    text: Qt.locale().standaloneMonthName(parsedDateTime.getMonth()) + parsedDateTime.toLocaleDateString(Qt.locale(), " yyyy")
+                    font.pointSize: 12
+                    color: "#aaa"
+                }
+            }
+        }
+        }
+    }
+    ListModel {
+      id: detailEventModel
+    }
+    ListView {
+        id: eventsListView
+        spacing: 2
+        clip: true
+        header: eventListHeader
+        anchors.fill: parent
+        model: detailEventModel
+        flickableDirection: Flickable.VerticalFlick
+        boundsBehavior: Flickable.StopAtBounds
+        ScrollBar.vertical: ScrollBar { 
+          policy: ScrollBar.AlwaysOn
+        }
+        delegate: Rectangle {
+            width: parent.width - 10
+            height: gLayout.height
+            Layout.fillHeight: true
+            Layout.margins: 10
+            border.color: Theme.gray
+            // border.radius: 2
+            border.width: 1
+            MouseArea {
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    // tView.selection.clear()
+                    // tView.selection.select(modelRow)
+                    // showDiffDetails(internalModel.index(modelRow, 0))
+                    if (mouse.button == Qt.LeftButton)
+                    {
+                        // console.log("[LEFT] log: " + modelRow, tableView.model.data(tableView.model.index(styleData.row, 0)));
+                        // showDiffDetails(tableView.model.index(styleData.row, 0))
+                    } else if (mouse.button == Qt.RightButton) {
+                        // console.log("[RIGHT] log: " + modelRow, tableView.model.data(tableView.model.index(styleData.row, 0)));
+                        contextMenu.popup()
+                    }
+                }
+            }   
+          GridLayout {
+            id: gLayout
+            Layout.fillWidth: true
+            // Layout.margins: 20
+            // Layout.padding: 10
+            // rowSpacing: 20
+            rows: 6
+            columns: 10
+            Menu { id: contextMenu
+                MenuItem {
+                  text: qsTr('Patch with this')
+                  onTriggered: {
+                    console.log("item id " + modelRow)
+                    console.log(styleData)
+                    core.patchDiff(tableView.model.index(styleData.row, 0))
+                  }
+                }
+                MenuItem {
+                  text: qsTr('Delete this patch')
+                  onTriggered: {
+                    console.log("item id " + modelRow)
+                    console.log(styleData)
+                    core.deleteDiff(tableView.model.index(styleData.row, 0))
+                  }
+                }
+                MenuItem {
+                  text: qsTr('Share this patch (pretty link)')
+                }
+                MenuItem {
+                  text: qsTr('Share this patch (raw link)')
+                }
+                MenuItem {
+                  text: qsTr('Upload this patch')
+                }
+            }
+            Label {
+              // id: diffName
+              text: "Name"
+              font.bold: true
+              font.underline: true
+              font.capitalization: Font.SmallCaps
+              font.family: "Helvetica"
+              font.pixelSize: 15
+              Layout.row: 0
+              Layout.column: 0
+              Layout.columnSpan: 2
+              Layout.margins: 5
+              color: Theme.mainColor
+              wrapMode: Text.WordWrap
+              // horizontalAlignment: Text.AlignBottom
+              // verticalAlignment: Text.AlignBottom
+            }
+            Text {
+              text: diffName
+              Layout.row: 1
+              Layout.column: 0
+              Layout.columnSpan: 2
+              Layout.margins: 5
+              font: Theme.font
+              color: Theme.gray
+              wrapMode: Text.WrapAnywhere
+              // horizontalAlignment: Text.AlignBottom
+              // verticalAlignment: Text.AlignBottom
+              MouseArea {
+                  id: tooltipMa
+                  anchors.fill: parent
+                  hoverEnabled: true
+              }
+              ToolTip {
+                visible: tooltipText ? tooltipMa.containsMouse : false
+                delay: 500
+                contentItem: Text {
+                    color: Theme.mainColorDarker
+                    text: tooltipText
+                }
+                background: Rectangle {
+                    border.color: Theme.mainColorDarker
+                }
+              }
+            }
+            Label {
+              text: "Description"
+              font.family: "Helvetica"
+              font.pixelSize: 12
+              Layout.row: 2
+              Layout.column: 0
+              Layout.columnSpan: 2
+              Layout.margins: 5
+              color: Theme.mainColor
+              wrapMode: Text.WordWrap
+              // horizontalAlignment: Text.AlignBottom
+              // verticalAlignment: Text.AlignBottom
+            }
+            TextField {
+              id: setDescription
+              placeholderText: "no description yet...."
+              font.family: "Helvetica"
+              font.pixelSize: 15
+              Layout.row: 3
+              Layout.column: 0
+              Layout.columnSpan: 5
+              background: Rectangle {
+                  radius: 2
+                  border.color: Theme.gray
+                  border.width: 1
+                  height: setDescription.height
+              }
+              // width: 600
+              Layout.margins: 5
+              // anchors.right: parent.right
+              // anchors.left: parent.left
+              // anchors.margins: 5
+              // font: Theme.font
+              color: Theme.darkGray
+              wrapMode: Text.Wrap
+              Layout.fillWidth: true
+              // horizontalAlignment: Text.AlignBottom
+              // verticalAlignment: Text.AlignBottom
+            }
+            // Text {
+            //   id: diffPath
+            //   text: diffDescription
+            //   Layout.row: 3
+            //   Layout.column: 0
+            //   Layout.columnSpan: 2
+            //   Layout.margins: 5
+            //   font: Theme.font
+            //   color: Theme.gray
+            //   wrapMode: Text.Wrap
+            //   // horizontalAlignment: Text.AlignBottom
+            //   // verticalAlignment: Text.AlignBottom
+            // }
+
+            Label {
+              text: "Created"
+              font.family: "Helvetica"
+              font.pixelSize: 12
+              Layout.row: 4
+              Layout.column: 0
+              Layout.columnSpan: 2
+              Layout.maximumWidth: parent.width * 0.5
+              Layout.margins: 5
+              color: Theme.mainColor
+              wrapMode: Text.WordWrap
+              // horizontalAlignment: Text.AlignBottom
+              // verticalAlignment: Text.AlignBottom
+            }
+            Custom.ActionDelegate {
+              Layout.row: 5
+              Layout.column: 8
+              Layout.columnSpan: 2
+              Layout.fillWidth: true
+              currentPatch: true
+            }
+            Text {
+              id: titleLabel
+              text: diffTime
+              Layout.row: 5
+              Layout.column: 0
+              Layout.columnSpan: 2
+              Layout.margins: 5
+              font: Theme.font
+              color: Theme.gray
+              wrapMode: Text.Wrap
+              // horizontalAlignment: Text.AlignBottom
+              // verticalAlignment: Text.AlignBottom
+            }
+            Image {
+              id: img
+              source: path
+              x: 200
+              Layout.row: 0
+              Layout.rowSpan: 3
+              Layout.column: 8
+              // Layout.columnSpan: 2
+              Layout.margins: 5
+              Layout.preferredWidth: 120
+              Layout.preferredHeight: 120
+              fillMode: Image.PreserveAspectFit
+              smooth: true
+              MouseArea {
+                  id: ma
+                  anchors.fill: parent
+                  onClicked: requestExpandImage(path)
+              }
+            }
+            // ImageScroller {
+            //   eventId : id
+            //   // y: 10
+            //   Layout.row: 0
+            //   Layout.rowSpan: 3
+            //   Layout.column: 5
+            //   Layout.columnSpan: 5
+            //   Layout.minimumWidth: 90
+            //   Layout.minimumHeight: 90
+            // }
+          }
+        }
+    }
+  }
+    onClearDetails: {
+      console.log("clearing")
+      detailEventModel.clear()
+    }
+     onDisplayDiffDetails: {
+       console.log("[onDisplayDiffDetails] called")
+      //make name short enuogh to fit
+      var elipse = 20
+      var elipsed = ""
+      if (name.length > elipse) {
+        elipsed = name.substring(name.length - elipse,name.length)
+        elipsed = "..." + elipsed
+      }
+      console.log("[onDisplayDiffDetails] selected date: ", selectedDate)
+      detailEventModel.append({tooltipText: name, diffName: elipsed, diffDescription: description, path: imagePath, diffTime: (selectedDate.getHours() < 10 ? '0' : '') + selectedDate.getHours() + ":" + (selectedDate.getMinutes() < 10 ? '0' : '') + selectedDate.getMinutes() + ":" + (selectedDate.getSeconds()  < 10 ? '0' : '') + selectedDate.getSeconds()})
+      //  console.log("id, name, startTime, description: ", id, name, selectedDate, description)
+      parsedDateTime = selectedDate
+      //  console.log("here ", Qt.locale().standaloneDayName(parsedDateTime.getDay(), Locale.LongFormat))
+
+  }
+}
