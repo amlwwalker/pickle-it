@@ -1,6 +1,6 @@
 # PickleIt
 
-PickleIt is a pet project inspired by seeing people organise versions of documents/files with extensions like
+PickleIt is a project inspired by seeing people organise versions of documents/files with extensions like
 
 ```
 pres.v1.pptx
@@ -11,6 +11,14 @@ pres.v3FINALF**K.pptx
 
 I wanted to see if I could build an application that would make versioning of files, something along the lines of git
 , for code versioning.
+
+
+## Download
+
+Currently I have only compiled it for OSX, and as I only have my dev computer available to test it, I can't be sure
+ everything will work for you, however the [https://drive.google.com/drive/folders
+                                             /1549Q1h66PTeGEKdlq4bKQKt6osJSSCNM](OSX download link is here). It's stored on Google Drive, so just click the
+  big Download All button, top right. Unzip it, and double click it to run it.
 
 ## Basics
 At this stage, without going into the technical details (possibly I will here at a later date), PickleIt allows the
