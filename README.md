@@ -16,8 +16,7 @@ I wanted to see if I could build an application that would make versioning of fi
 ## Download
 
 Currently I have only compiled it for OSX, and as I only have my dev computer available to test it, I can't be sure
- everything will work for you, however the [https://drive.google.com/drive/folders
-                                             /1549Q1h66PTeGEKdlq4bKQKt6osJSSCNM](OSX download link is here). It's stored on Google Drive, so just click the
+ everything will work for you, however the [https://drive.google.com/drive/folders/1549Q1h66PTeGEKdlq4bKQKt6osJSSCNM](OSX download link is here). It's stored on Google Drive, so just click the
   big Download All button, top right. Unzip it, and double click it to run it.
 
 ## Basics
