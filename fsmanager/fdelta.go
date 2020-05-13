@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 
 	"github.com/amlwwalker/pickleit/fsmanager/compressor"
-	"github.com/mdvan/fdelta"
+	"github.com/amlwwalker/fdelta"
 )
 
 // var originalFile string
