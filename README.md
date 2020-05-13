@@ -53,7 +53,8 @@ The drop down allows slightly better filtering, by file. This affects both the c
 ### Detail View
 
 The detail view shows you the name of the file, the creation data, and (on OSX and only in alpha), a screenshot of
- the app when it was saved. Clicking the picture will enlarge it.
+ the app when it was saved. Clicking the picture will enlarge it. There is also a description box so you can add some
+  detail for when you come back, to each patch. Enter some text, and hit enter, then click just outside the input
  
 ### Options
 
@@ -67,3 +68,6 @@ The detail view shows you the name of the file, the creation data, and (on OSX a
 
 You can close the window and PickleIt will run in the background. There is an icon in the system tray to bring it
  back to the front.
+
+
+docker run -idt -e GOPATH=/Users/alex/go:/media/sf_GOPATH0 therecipe/qt:windows_64_shared

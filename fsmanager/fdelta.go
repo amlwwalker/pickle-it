@@ -6,7 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com/amlwwalker/experiments/diffing-options/compressor"
+	"github.com/amlwwalker/pickleit/fsmanager/compressor"
 	"github.com/mdvan/fdelta"
 )
 

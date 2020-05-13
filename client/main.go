@@ -73,12 +73,13 @@ func main() {
 			if err := manager.BeginForwardPatch(*pathPtr, *patchPtr, ""); err != nil {
 				manager.ErrorF("There was an error forward patching file %s: %s", *pathPtr, err)
 			}
-		} else {
-			manager.NoticeF("Patching backward for", *pathPtr)
-			if err := manager.BeginBackwardPatch(*pathPtr, *patchPtr); err != nil {
-				manager.ErrorF("There was an error backward patching file %s: %s", *pathPtr, err)
-			}
 		}
+		//else {
+		//	manager.NoticeF("Patching backward for", *pathPtr)
+		//	if err := manager.BeginBackwardPatch(*pathPtr, *patchPtr); err != nil {
+		//		manager.ErrorF("There was an error backward patching file %s: %s", *pathPtr, err)
+		//	}
+		//}
 
 	}
 
