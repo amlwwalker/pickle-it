@@ -191,21 +191,29 @@ func (cGui *clientGui) patchFile(g *gocui.Gui, v *gocui.View) error {
 	//get rid of this view
 	delView(g, v)
 	g.SetCurrentView("menu")
-	if patch.Direction { //forward patch
-		cGui.NoticeF("Patching forward for %s -> %s. Patch -> %s", patch.Object, patch.Subject, patch.DiffPath)
-		//check that the forward patch is where we expect it to be
+	cGui.NoticeF("Patching forward for %s -> %s. Patch -> %s", patch.Object, patch.Subject, patch.DiffPath)
+	//check that the forward patch is where we expect it to be
 
-		if err := cGui.Manager.BeginForwardPatch(patch.Object, patch.DiffPath, ""); err != nil {
-			cGui.ErrorF("There was an error forward patching file %s: %s", patch.DiffPath, err)
-			return err
-		}
-	} else {
-		cGui.NoticeF("Patching backward for %s -> %s", patch.Subject, patch.Object)
-		if err := cGui.Manager.BeginBackwardPatch(patch.Subject, patch.DiffPath); err != nil {
-			cGui.ErrorF("There was an error backward patching file %s: %s", patch.DiffPath, err)
-			return err
-		}
+	if err := cGui.Manager.BeginForwardPatch(patch.Object, patch.DiffPath, ""); err != nil {
+		cGui.ErrorF("There was an error forward patching file %s: %s", patch.DiffPath, err)
+		return err
 	}
+	//TODO: We can't do backward patching, this will need to be removed I think
+	// if patch.Direction { //forward patch
+	// 	cGui.NoticeF("Patching forward for %s -> %s. Patch -> %s", patch.Object, patch.Subject, patch.DiffPath)
+	// 	//check that the forward patch is where we expect it to be
+
+	// 	if err := cGui.Manager.BeginForwardPatch(patch.Object, patch.DiffPath, ""); err != nil {
+	// 		cGui.ErrorF("There was an error forward patching file %s: %s", patch.DiffPath, err)
+	// 		return err
+	// 	}
+	// } else {
+	// 	cGui.NoticeF("Patching backward for %s -> %s", patch.Subject, patch.Object)
+	// 	if err := cGui.Manager.BeginBackwardPatch(patch.Subject, patch.DiffPath); err != nil {
+	// 		cGui.ErrorF("There was an error backward patching file %s: %s", patch.DiffPath, err)
+	// 		return err
+	// 	}
+	// }
 
 	return nil
 }

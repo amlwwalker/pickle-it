@@ -51,7 +51,10 @@ func main() {
 	var cGui clientGui
 	informer := make(chan logic.OperatingMessage)
 	//got to be careful now as type asserting for an io.Writer to log to
-	manager := logic.NewManager(version, *logLevelPtr, "[%{module}] [%{file} - %{line}] [%{level}] %{message}", informer, &cGui) //set the log level
+	manager, err := logic.NewManager(version, *logLevelPtr, "[%{module}] [%{file} - %{line}] [%{level}] %{message}", informer, &cGui) //set the log level
+	if err != nil {
+		fmt.Println("Error starting new manager", err)
+	}
 	defer manager.TearDown()
 	cGui.newUI(manager, *logLevelPtr)
 }

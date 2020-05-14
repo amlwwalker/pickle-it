@@ -19,12 +19,23 @@ Currently I have only compiled it for OSX, and as I only have my dev computer av
  everything will work for you, however the [OSX download link is here](https://drive.google.com/drive/folders/1549Q1h66PTeGEKdlq4bKQKt6osJSSCNM). It's stored on Google Drive, so just click the
   big Download All button, top right. Unzip it, and double click it to run it.
 
+## Compilation
+
+Although there is a command line interface version, this is really about qt and the gui. Unfortunately the Qt library doesn't allow for go modules (or didn't at the time of writing the application) so you will need to install that directly. See https://github.com/therecipe/qt.
+* After that, inside the gui directory is a makefile, and something like `make local` or `make desktop` will build you the compiled application. There may end up (again due to the go modules situation) other libraries that you will need to `go get`
+
 ## Basics
 At this stage, without going into the technical details (possibly I will here at a later date), PickleIt allows the
  user to drop any file, they are working on, into PickleIt. From that moment on, PickleIt will watch for changes on
   the file (saves) and create a version of the file. This way, at any point, the user can go back to a previous
    version by just "patching" it - which is the click of a button in PickleIt
    
+
+1. Create a file that you are going to work on
+2. Drop the file into the Dropzone. As long as pickleit is open in the background it will watch for changes to this file
+3. When a save occurs on the file, pickleit will take a binary diff of the file and add the diff to the list. You can either delete or patch any diff at any time. Note, you may need to close the original to see the diff take effect when patching.
+4. Diffs can have screenshots (if the app has permission) and descriptions to help you remember what was going on at that moment in time
+5. There is also a calendar view of diffs so you can go back in time based on the calendar changes.
 
 ## Detail Views
 
@@ -53,7 +64,8 @@ The drop down allows slightly better filtering, by file. This affects both the c
 ### Detail View
 
 The detail view shows you the name of the file, the creation data, and (on OSX and only in alpha), a screenshot of
- the app when it was saved. Clicking the picture will enlarge it.
+ the app when it was saved. Clicking the picture will enlarge it. There is also a description box so you can add some
+  detail for when you come back, to each patch. Enter some text, and hit enter, then click just outside the input
  
 ### Options
 
@@ -67,3 +79,5 @@ The detail view shows you the name of the file, the creation data, and (on OSX a
 
 You can close the window and PickleIt will run in the background. There is an icon in the system tray to bring it
  back to the front.
+
+

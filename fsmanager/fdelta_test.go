@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/amlwwalker/pickleit/fsmanager/compressor"
-	"github.com/mdvan/fdelta"
+	"github.com/amlwwalker/fdelta"
 )
 func main() {
 	DefineFiles()

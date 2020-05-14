@@ -5,9 +5,21 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/amlwwalker/pickleIt/logic"
-	"github.com/amlwwalker/pickleIt/utilities"
+	"github.com/amlwwalker/pickleit/logic"
+	"github.com/amlwwalker/pickleit/utilities"
 )
+
+var clientVersion = utilities.Version{
+	Tag: "initial",
+	//Flavour:     string
+	Version: "0.1",
+	//DBName:      string
+	//Hash        string
+	Date:        "May 13, 2020",
+	PersistLogs: true,
+	Production:  false,
+	//Virtual     bool
+}
 
 type tmpStruct struct{}
 
@@ -24,6 +36,7 @@ func (b *tmpStruct) Close() error {
 // Terminal client testing a filewatcher for the application
 // Flat should specify the log level
 func main() {
+	informer := make(chan logic.OperatingMessage) //TODO figure out wtf this does
 	logLevelPtr := flag.Int("log", 6, "Set the log level (1 - 6)")
 	diffPtr := flag.Bool("diff", true, "set to true to diff and false to patch")
 	pathPtr := flag.String("file", "", "Set the file (path) to watch for changes")
@@ -32,7 +45,12 @@ func main() {
 	directionPtr := flag.String("direction", "forward", "Set the direction to patch (default forward)")
 	patchPtr := flag.String("patch", "", "Choose the patch file, and source (must agree with patch direction) and the path file")
 	flag.Parse()
-	manager := logic.NewManager(*logLevelPtr, "[%{module}] [%{line}] [%{level}] %{message}", os.Stdout) //set the log level
+	//manager := logic.NewManager(*logLevelPtr, "[%{module}] [%{line}] [%{level}] %{message}", os.Stdout) //set the log level
+
+	manager, err := logic.NewManager(clientVersion, *logLevelPtr, "[%{module}] [%{file} - %{line}] [%{level}] %{message}", informer, os.Stdout)
+	if err != nil {
+		fmt.Println("Error starting manager", err)
+	}
 	manager.DemoLogging()
 	defer manager.TearDown()
 
@@ -73,12 +91,13 @@ func main() {
 			if err := manager.BeginForwardPatch(*pathPtr, *patchPtr, ""); err != nil {
 				manager.ErrorF("There was an error forward patching file %s: %s", *pathPtr, err)
 			}
-		} else {
-			manager.NoticeF("Patching backward for", *pathPtr)
-			if err := manager.BeginBackwardPatch(*pathPtr, *patchPtr); err != nil {
-				manager.ErrorF("There was an error backward patching file %s: %s", *pathPtr, err)
-			}
 		}
+		//else {
+		//	manager.NoticeF("Patching backward for", *pathPtr)
+		//	if err := manager.BeginBackwardPatch(*pathPtr, *patchPtr); err != nil {
+		//		manager.ErrorF("There was an error backward patching file %s: %s", *pathPtr, err)
+		//	}
+		//}
 
 	}
 

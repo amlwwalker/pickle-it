@@ -1,11 +1,8 @@
 package fsmanager
 
 import (
-	"bufio"
-	"bytes"
 	"context"
 	"fmt"
-	"io"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -13,8 +10,6 @@ import (
 	"time"
 
 	"github.com/amlwwalker/pickleit/utilities"
-
-	"github.com/amlwwalker/binarydist"
 )
 
 // ManageFileDiffing handles creating the diffs on the background routines and creating the information
@@ -146,56 +141,56 @@ func fdeltaDiff(ctx context.Context, sub, obj string) ([]byte, error) {
 	}
 }
 
-// uniDirectionalDiff takes two file names, however returns the diffs as bytes
-// rather than writing the diffs out to a file
-// Technically binary diffs are optimized for one direction, so to create bi-directional
-// diffs, the trick is to call the differ in both directions.
-// This function juse manages creating the diffs and has no interest in the direction that it is occuring in.
-// An advanced version of this will be take io.Readers in so that it doesn't care what the data source is that it is diffing
-func uniDirectionalDiff(ctx context.Context, sub, obj io.Reader) ([]byte, error) {
-	var b bytes.Buffer
-
-	subObjDiff := bufio.NewWriter(&b)
-	if _, err := binarydist.Diff(ctx, sub, obj, subObjDiff); err != nil {
-		return nil, err
-	}
-	return b.Bytes(), nil
-}
-
-// uniDirectionalFSDiff creates a diff based on the input files
-// however saves it out to the filename provided
-// Technically binary diffs are optimized for one direction, so to create bi-directional
-// diffs, the trick is to call the differ in both directions.
-// This function juse manages creating the diffs and has no interest in the direction that it is occuring in.
-// An advanced version of this will be take io.Readers in so that it doesn't care what the data source is that it is diffing
-func uniDirectionalFSDiff(ctx context.Context, sub, obj io.Reader, filePath string) (int64, error) {
-	var subObjDiff io.Writer
-	var err error
-	if subObjDiff, err = os.Create(filePath); err != nil {
-		return 0, err
-	}
-	if bytesWritten, err := binarydist.Diff(ctx, sub, obj, subObjDiff); err != nil {
-		return 0, err
-	} else {
-		return bytesWritten, nil
-	}
-}
-
-// uniDirectionalFSDiffOptimized creates a diff based on the input files.
-// Major difference to the other Diff helpers is this one retrieves the index from a database.
-func uniDirectionalFSDiffOptimized(ctx context.Context, sub, obj io.Reader, filePath string, retrieveOptimalIndex func(index *[]int64) error) (int64, error) {
-	var subObjDiff io.Writer
-	var err error
-	if subObjDiff, err = os.Create(filePath); err != nil {
-		return 0, err
-	}
-	I := &[]int64{}
-	if err := retrieveOptimalIndex(I); err != nil {
-		return 0, err
-	}
-	if bytesWritten, err := binarydist.OptimizedDiff(ctx, I, sub, obj, subObjDiff); err != nil {
-		return 0, err
-	} else {
-		return bytesWritten, nil
-	}
-}
+//// uniDirectionalDiff takes two file names, however returns the diffs as bytes
+//// rather than writing the diffs out to a file
+//// Technically binary diffs are optimized for one direction, so to create bi-directional
+//// diffs, the trick is to call the differ in both directions.
+//// This function juse manages creating the diffs and has no interest in the direction that it is occuring in.
+//// An advanced version of this will be take io.Readers in so that it doesn't care what the data source is that it is diffing
+//func uniDirectionalDiff(ctx context.Context, sub, obj io.Reader) ([]byte, error) {
+//	var b bytes.Buffer
+//
+//	subObjDiff := bufio.NewWriter(&b)
+//	if _, err := binarydist.Diff(ctx, sub, obj, subObjDiff); err != nil {
+//		return nil, err
+//	}
+//	return b.Bytes(), nil
+//}
+//
+//// uniDirectionalFSDiff creates a diff based on the input files
+//// however saves it out to the filename provided
+//// Technically binary diffs are optimized for one direction, so to create bi-directional
+//// diffs, the trick is to call the differ in both directions.
+//// This function juse manages creating the diffs and has no interest in the direction that it is occuring in.
+//// An advanced version of this will be take io.Readers in so that it doesn't care what the data source is that it is diffing
+//func uniDirectionalFSDiff(ctx context.Context, sub, obj io.Reader, filePath string) (int64, error) {
+//	var subObjDiff io.Writer
+//	var err error
+//	if subObjDiff, err = os.Create(filePath); err != nil {
+//		return 0, err
+//	}
+//	if bytesWritten, err := binarydist.Diff(ctx, sub, obj, subObjDiff); err != nil {
+//		return 0, err
+//	} else {
+//		return bytesWritten, nil
+//	}
+//}
+//
+//// uniDirectionalFSDiffOptimized creates a diff based on the input files.
+//// Major difference to the other Diff helpers is this one retrieves the index from a database.
+//func uniDirectionalFSDiffOptimized(ctx context.Context, sub, obj io.Reader, filePath string, retrieveOptimalIndex func(index *[]int64) error) (int64, error) {
+//	var subObjDiff io.Writer
+//	var err error
+//	if subObjDiff, err = os.Create(filePath); err != nil {
+//		return 0, err
+//	}
+//	I := &[]int64{}
+//	if err := retrieveOptimalIndex(I); err != nil {
+//		return 0, err
+//	}
+//	if bytesWritten, err := binarydist.OptimizedDiff(ctx, I, sub, obj, subObjDiff); err != nil {
+//		return 0, err
+//	} else {
+//		return bytesWritten, nil
+//	}
+//}
