@@ -18,7 +18,6 @@ import (
 	utilities "github.com/amlwwalker/pickleit/utilities"
 	logger "github.com/apsdehal/go-logger"
 	"github.com/denisbrodbeck/machineid"
-	"github.com/kr/binarydist"
 	radovskyb "github.com/radovskyb/watcher"
 )
 
@@ -302,12 +301,12 @@ func (m *Manager) OnFileChange(fileChanged string) (utilities.File, error) {
 	return file, err
 }
 
-// OnProgressChanged manages progress of the diff, TODO: Implement.
-func (m *Manager) OnProgressChanged(increment func(int) error, event *binarydist.Event) {
-	// fmt.Fprintln(w, "callback for ", event.Name, " progress ", event.Progress)
-	// increment(event.Progress)
-	m.Notice("on progress changed called with ...")
-}
+// OnProgressChanged manages progress of the diff, TODO: Implement. Requires binarydist, so is this an outdated function?
+// func (m *Manager) OnProgressChanged(increment func(int) error, event *binarydist.Event) {
+// 	// fmt.Fprintln(w, "callback for ", event.Name, " progress ", event.Progress)
+// 	// increment(event.Progress)
+// 	m.Notice("on progress changed called with ...")
+// }
 
 // prepareDatabaseForFile is responsible for keeping all references to the version of the file,
 // the diff and the metadata of the diffs. Before any file is copied and stored, it should be managed by the database
