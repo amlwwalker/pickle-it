@@ -13,12 +13,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/amlwwalker/binarydist"
 	db "github.com/amlwwalker/pickleit/database"
 	fsmanager "github.com/amlwwalker/pickleit/fsmanager"
 	utilities "github.com/amlwwalker/pickleit/utilities"
 	logger "github.com/apsdehal/go-logger"
 	"github.com/denisbrodbeck/machineid"
+	"github.com/kr/binarydist"
 	radovskyb "github.com/radovskyb/watcher"
 )
 

@@ -4,7 +4,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/schollz/progressbar"
+	"github.com/schollz/progressbar/v3"
 )
 
 // ProgressBar is a wrapper around the progressbar library

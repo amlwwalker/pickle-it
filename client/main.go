@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/amlwwalker/pickleIt/logic"
-	"github.com/amlwwalker/pickleIt/utilities"
+	"github.com/amlwwalker/pickleit/logic"
+	"github.com/amlwwalker/pickleit/utilities"
 )
 
 type tmpStruct struct{}
